@@ -10,7 +10,10 @@ const OrderSchema = new Schema({
 });
 
 const UserSchema = new Schema({
-  phone_number: String,
+  phone_number: {
+    type: Number,
+    unique: true,
+  },
   password: String,
   name: String,
 });
