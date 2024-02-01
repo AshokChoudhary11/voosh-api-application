@@ -9,32 +9,19 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("health check!");
+  res.send("Hello World!");
 });
 
 app.post("/add-user", async (req, res) => {
   try {
     const { name, phone, password } = req.body;
-    if (!name || !phone || !password) {
-      return res(404).json({
-        status: "failed",
-        message: "required field is missing !",
-      });
-    }
-    const exsistingUser = User.find({ phone_number: phone });
-    if (exsistingUser) {
-      return res.json({
-        status: "fail",
-        message: "user already exsits with this phone number",
-      });
-    }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
       name,
       phone_number: phone,
       password: hashedPassword,
     });
-    res.json({ status: "success", message: "User added successfully", user });
+    res.json({ message: "User added successfully", user });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -44,12 +31,6 @@ app.post("/login-user", async (req, res) => {
   try {
     const { phone, password } = req.body;
     const user = await User.findOne({ phone_number: phone });
-    if (!phone || !password) {
-      return res.status(404).json({
-        status: "failed",
-        message: "Invalid Credentials",
-      });
-    }
     console.log(user);
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res
