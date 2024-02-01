@@ -3,6 +3,7 @@ const express = require("express");
 const { User, Order } = require("./model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { protect } = require("./middleware/protect");
 
 const app = express();
 
@@ -45,9 +46,9 @@ app.post("/login-user", async (req, res) => {
   }
 });
 
-app.get("/get-order", async (req, res) => {
+app.get("/get-order", protect, async (req, res) => {
   try {
-    const { user_id } = req.query;
+    const { user_id } = req.user;
     const orders = await Order.find({ user_id });
     res.json({ orders });
   } catch (error) {
@@ -55,12 +56,13 @@ app.get("/get-order", async (req, res) => {
   }
 });
 
-app.post("/add-order", async (req, res) => {
+app.post("/add-order", protect, async (req, res) => {
   try {
-    const { user_id, sub_total, phone_number } = req.body;
+    const { sub_total, phone_number } = req.body;
+    const { user_id } = req.user;
 
     // Validate input data
-    if (!user_id || !sub_total || !phone_number) {
+    if (!sub_total || !phone_number) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
