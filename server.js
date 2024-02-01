@@ -9,8 +9,11 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+app.get("/health-check", (req, res) => {
+  return res.status(200).json({
+    status: "success",
+    message: "status is up and running !🎉",
+  });
 });
 
 app.post("/add-user", async (req, res) => {
