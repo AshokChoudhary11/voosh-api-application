@@ -22,6 +22,14 @@ app.post("/add-user", async (req, res) => {
   try {
     const { name, phone, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
+    try {
+      const alreadyUser = await User.findOne({ phone_number: phone });
+      if (alreadyUser.phone_number) {
+        res.status(400).json({ error: "Phone number already registered" });
+      }
+    } catch {
+      // pass
+    }
     const user = await User.create({
       name,
       phone_number: phone,
