@@ -75,8 +75,8 @@ app.post("/login-user", async (req, res) => {
 
 app.get("/get-order", protect, async (req, res) => {
   try {
-    const { user_id } = req.user;
-    const orders = await Order.find({ user_id });
+    const { _id } = req.user;
+    const orders = await Order.find({ user_id: _id });
     res.json({ orders });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
