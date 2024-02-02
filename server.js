@@ -59,8 +59,6 @@ app.post("/login-user", async (req, res) => {
       });
     }
     const user = await User.findOne({ phone_number: phone });
-    const value = await bcrypt.compare(password, user.password);
-    console.log("user", value);
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res
         .status(401)
