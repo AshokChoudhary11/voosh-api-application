@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const { protect } = require("./middleware/protect");
 
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 
@@ -34,17 +35,23 @@ app.post("/add-user", async (req, res) => {
 app.post("/login-user", async (req, res) => {
   try {
     const { phone, password } = req.body;
+    if (!phone || !password) {
+      return res.status(404).json({
+        status: "failed",
+        message: "Invalid credentials",
+      });
+    }
     const user = await User.findOne({ phone_number: phone });
-    console.log(user);
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res
         .status(401)
         .json({ error: "Invalid phone number or password" });
     }
-
+    console.log(user);
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
     res.json({ message: "Login successful", token });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
