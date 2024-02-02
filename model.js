@@ -14,7 +14,10 @@ const UserSchema = new Schema({
     type: Number,
     unique: true,
   },
-  password: String,
+  password: {
+    type: String,
+    required: true,
+  },
   name: String,
 });
 

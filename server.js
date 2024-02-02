@@ -27,6 +27,7 @@ app.post("/add-user", async (req, res) => {
       phone_number: phone,
       password: hashedPassword,
     });
+    user.password = "";
     res.json({ message: "User added successfully", user });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
@@ -43,6 +44,8 @@ app.post("/login-user", async (req, res) => {
       });
     }
     const user = await User.findOne({ phone_number: phone });
+    const value = await bcrypt.compare(password, user.password);
+    console.log("user", value);
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res
         .status(401)
