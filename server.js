@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const { User, Order } = require("./model");
 const bcrypt = require("bcrypt");
+const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const { protect } = require("./middleware/protect");
 
