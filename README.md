@@ -115,7 +115,7 @@ Before running the application, make sure you have the following installed:
   {
     "orders": [
       {
-        "user_id": "user_id_here",
+        "_id": "order_id",
         "sub_total": 100.0,
         "phone_number": 1234567890
       }
@@ -141,7 +141,7 @@ Before running the application, make sure you have the following installed:
   {
     "message": "Order added successfully",
     "order": {
-      "user_id": "user_id_here",
+      "_id": "order_id",
       "sub_total": 100.0,
       "phone_number": 1234567890
     }
