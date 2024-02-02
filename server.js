@@ -86,7 +86,7 @@ app.get("/get-order", protect, async (req, res) => {
 app.post("/add-order", protect, async (req, res) => {
   try {
     const { sub_total, phone_number } = req.body;
-    const { user_id } = req.user;
+    const { _id } = req.user;
 
     // Validate input data
     if (!sub_total || !phone_number) {
