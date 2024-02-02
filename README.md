@@ -1,4 +1,4 @@
-# Express API Readme
+# Voosh Application
 
 This repository contains a simple Express.js API for user authentication and order management. The API uses MongoDB as its database and includes user registration, login, and order management endpoints.
 
@@ -69,7 +69,7 @@ Before running the application, make sure you have the following installed:
   ```json
   {
     "name": "John Doe",
-    "phone": "1234567890",
+    "phone": 1234567890,
     "password": "secure_password"
   }
   ```
@@ -79,7 +79,7 @@ Before running the application, make sure you have the following installed:
     "message": "User added successfully",
     "user": {
       "name": "John Doe",
-      "phone_number": "1234567890"
+      "phone_number": 1234567890
     }
   }
   ```
@@ -92,7 +92,7 @@ Before running the application, make sure you have the following installed:
 - **Request:**
   ```json
   {
-    "phone": "1234567890",
+    "phone": 1234567890,
     "password": "secure_password"
   }
   ```
