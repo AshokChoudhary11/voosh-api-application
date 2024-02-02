@@ -38,6 +38,13 @@ app.post("/add-user", async (req, res) => {
     user.password = "";
     res.json({ message: "User added successfully", user });
   } catch (error) {
+    if (error.name === "ValidationError") {
+      if (error.errors.phone_number) {
+        return res
+          .status(400)
+          .json({ error: "Phone number must be 10 digits" });
+      }
+    }
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
@@ -94,6 +101,14 @@ app.post("/add-order", protect, async (req, res) => {
     res.json({ message: "Order added successfully", order });
   } catch (error) {
     console.error(error);
+    if (error.name === "ValidationError") {
+      if (error.errors.phone_number) {
+        return res
+          .status(400)
+          .json({ error: "Phone number must be 10 digits" });
+      }
+    }
+
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
