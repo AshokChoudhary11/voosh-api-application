@@ -94,7 +94,7 @@ app.post("/add-order", protect, async (req, res) => {
     }
 
     // Create a new order
-    const order = await Order.create({ user_id, sub_total, phone_number });
+    const order = await Order.create({ user_id: _id, sub_total, phone_number });
 
     res.json({ message: "Order added successfully", order });
   } catch (error) {
