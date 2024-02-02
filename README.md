@@ -150,6 +150,6 @@ Before running the application, make sure you have the following installed:
 
 ## Author
 
-- [Your Name](https://github.com/your-username)
+- [Ashok Kumar](https://github.com/AshokChoudhary11)
 
 Feel free to explore, modify, and use this Express API for your projects! If you encounter any issues or have suggestions for improvements, please create an issue or submit a pull request.
