@@ -10,7 +10,6 @@ const OrderSchema = new Schema({
   },
   phone_number: {
     type: Number,
-    unique: true,
     required: true,
     min: [1000000000, "Phone number must be at least 10 digits"], // Minimum length
     max: 9999999999, // Maximum length
